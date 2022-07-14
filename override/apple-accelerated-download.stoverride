@@ -1,0 +1,25 @@
+name:  Apple Accelerated Download
+desc: |-
+  Apple 相关 CDN 域名指向 Apple 香港源站：
+  • 🏬 iOS & Mac AppStore
+  • 🎵 Apple Music
+  • ⚙️ Apple Developer
+category: Apple
+icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Apple.png
+#>------
+
+hosts:
+  iosapps.itunes.apple.com: 17.253.85.201
+  osxapps.itunes.apple.com: 17.253.85.201
+  aod.itunes.apple.com: 17.253.85.201
+  publicassets.cdn-apple.com: 17.253.85.201
+  download.developer.apple.com: 17.253.85.201
+  devimages-cdn.apple.com: 17.253.85.201
+
+rules:
+  - DOMAIN-SUFFIX,iosapps.itunes.apple.com,DIRECT
+  - DOMAIN-SUFFIX,osxapps.itunes.apple.com,DIRECT
+  - DOMAIN-SUFFIX,aod.itunes.apple.com,DIRECT
+  - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+  - DOMAIN-SUFFIX,download.developer.apple.com,DIRECT
+  - DOMAIN-SUFFIX,devimages-cdn.apple.com,DIRECT

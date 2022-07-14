@@ -1,0 +1,38 @@
+name: BiliBili 重定向到中国大陆正规 CDN
+desc: |-
+  🇨🇳 仅适配中国区商店版
+  🍻 加载更流畅的 BiliBili 更值得干杯！
+  ⚠️ 需要 MitM 或者关闭 HTTPS 加载
+category: Bilibili
+icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/bilibili.png
+#>------
+
+http:
+  force-http-engine:
+    - "*.bilivideo.cn:80"
+    - "*.bilivideo.com:80"
+    - "*:4480"
+    - "*:9102"
+  mitm:
+    - "*.bilivideo.cn:443"
+    - "*.bilivideo.com:443"
+    - "*.mcdn.bilivideo.com:4483"
+    - "*.mcdn.bilivideo.cn:4483"
+  url-rewrite:
+    # alternative:
+    # upos-sz-mirrorhw.bilivideo.com
+    # upos-sz-mirrorcos.bilivideo.com
+    # upos-sz-mirrorcoso1.bilivideo.com
+    # upos-sz-mirrorcoso2.bilivideo.com
+    # upos-sz-mirrorbs.bilivideo.com
+    # upos-sz-mirrorali.bilivideo.com
+    - https?:\/\/(.*)\.bilivideo\.(cn|com)\/upgcxcode\/ http://upos-sz-mirrorcos.bilivideo.com transparent
+    - https?:\/\/(.*):(4480|4483|9102)\/upgcxcode\/ http://upos-sz-mirrorcos.bilivideo.com transparent
+
+script:
+  shortcuts:
+    bilibili-quic: network == 'udp' and geoip(dst_ip) == 'CN' and dst_port in [3478, 4483, 8000]
+    bilibili-shit: ('pcdn' in host and 'biliapi' in host) or ('p2p' in host and 'bilibili' in host)
+rules:
+  - SCRIPT,bilibili-quic,REJECT,no-track
+  - SCRIPT,bilibili-shit,REJECT,no-track

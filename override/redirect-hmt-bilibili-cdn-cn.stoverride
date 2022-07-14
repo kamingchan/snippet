@@ -1,0 +1,38 @@
+name: BiliBili 重定向到正规 CDN
+desc: |-
+  🇭🇰 仅适合在中国大陆使用港澳台版
+  🍻 加载更流畅的 BiliBili 更值得干杯！
+  ⚠️ 需要 MitM 或者关闭 HTTPS 加载
+category: Bilibili
+icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/bilibili.png
+#>------
+
+http:
+  force-http-engine:
+    - "*.bilivideo.cn:80"
+    - "*.bilivideo.com:80"
+
+    - "*:4480"
+    - "*:8000"
+    - "*:9102"
+
+  mitm:
+    - "*.bilivideo.cn:443"
+    - "*.bilivideo.com:443"
+    - "*.mcdn.bilivideo.cn:4483"
+    - "*.mcdn.bilivideo.com:4483"
+    - "*.mcdn.bilivideo.cn:8082"
+    - "*.mcdn.bilivideo.com:8082"
+
+  url-rewrite:
+    - https?:\/\/(.*):(8000)\/v1\/resource\/ - reject
+    # alternative:
+    # upos-sz-mirrorhw.bilivideo.com -> 华为云
+    # upos-sz-mirrorcos.bilivideo.com -> 腾讯云
+    # upos-sz-mirrorbs.bilivideo.com -> 白山云
+    # upos-sz-mirrorali.bilivideo.com -> 阿里云
+    # cn-gddg-ct-01-01.bilivideo.com -> 广东东莞电信
+    # cn-lnsy-cu-01-01.bilivideo.com -> 辽宁沈阳联通
+    # cn-gddg-cm-01-01.bilivideo.com -> 广东东莞移动
+    - https?:\/\/(.*)\.bilivideo\.(cn|com)\/upgcxcode\/ http://upos-sz-mirrorali.bilivideo.com transparent
+    - https?:\/\/(.*):(4480|4483|9102)\/upgcxcode\/ http://upos-sz-mirrorali.bilivideo.com transparent

@@ -1,0 +1,13 @@
+name: 屏蔽视频网站 P2P 后台上传
+desc: 避免视频网站通过 P2P 后台上传（原作者：Dreamacro）
+category: Bilibili
+icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/bilibili.png
+#>------
+
+rules:
+  - SCRIPT,tcp-p2p-shit,REJECT,no-track
+  - SCRIPT,udp-p2p-shit,REJECT,no-track
+script:
+  shortcuts:
+    tcp-p2p-shit: network == 'tcp' and 'stun' in host and ('douyu' in host or 'bilibili' in host)
+    udp-p2p-shit: network == 'udp' and ('bilibili' in host or 'mcdn' in host or 'douyu' in host)

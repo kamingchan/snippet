@@ -1,0 +1,15 @@
+name: Google CN 重定向
+desc: 将 g.cn / google.cn 重定向到 google.com
+category: Google
+icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Google.png
+#>------
+
+http:
+  force-http-engine:
+    - "g.cn"
+    - "*.google.cn"
+  mitm:
+    - "g.cn"
+    - "*.google.cn"
+  rewrite:
+    - ^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 302

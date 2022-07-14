@@ -1,0 +1,29 @@
+name: BiliBili 海外 CDN 重定向
+desc: |-
+  🌎 适配港澳台版和 Miao Project
+  🍻 加载更流畅的 BiliBili 更值得干杯！
+  ⚠️ 需要 MitM 或者关闭 HTTPS 加载
+category: Bilibili
+icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/bilibili.png
+#>------
+
+# 测试视频 https://www.bilibili.com/video/BV13r4y1o7Y9/
+# 诊断地址 https://www.bilibili.com/blackboard/video-diagnostics.html
+
+http:
+  force-http-engine:
+    - upos-hz-mirrorakam.akamaized.net:80
+    - "*.bilivideo.com:80"
+  mitm:
+    - upos-hz-mirrorakam.akamaized.net:443
+    - "*.bilivideo.com:443"
+
+  url-rewrite:
+    # alternative:
+    # upos-sz-mirrorhw.bilivideo.com -> 华为云
+    # upos-sz-mirrorcos.bilivideo.com -> 腾讯云
+    # upos-sz-mirrorali.bilivideo.com -> 阿里云
+    # cn-gddg-ct-01-01.bilivideo.com -> 广东东莞电信
+    # cn-lnsy-cu-01-01.bilivideo.com -> 辽宁沈阳联通
+    - https?:\/\/upos-hz-mirrorakam.akamaized.net\/upgcxcode\/ http://upos-sz-mirrorali.bilivideo.com transparent
+    - https?:\/\/(.*)\.bilivideo\.(cn|com)\/upgcxcode\/ http://upos-sz-mirrorali.bilivideo.com transparent

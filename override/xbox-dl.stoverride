@@ -1,0 +1,11 @@
+name: Xbox 下载重定向国内 CDN
+desc: https://blog.terrychan.me/2021/redirct-xboxlive-cdn-to-china
+category: Xbox
+icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Xbox.png
+#>------
+
+http:
+  force-http-engine:
+    - "*.xboxlive.com:80"
+  url-rewrite:
+    - https?:\/\/(assets\d|d\d|xvcf\d|dlassets)\.xboxlive\.com http://$1.xboxlive.cn 302
